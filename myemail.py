@@ -10,6 +10,7 @@ from email.mime.text import MIMEText
 def sendMail(fromAddr, password, smtpServer, toAddr, content):
 	msg = MIMEText(content, 'plain', 'utf-8')
 	msg['From'] = fromAddr
+	msg['To'] = toAddr
 	msg['Subject'] = Header(u'text', 'utf8').encode()
 	server = smtplib.SMTP(smtpServer, 25)
 	server.login(fromAddr, password)
