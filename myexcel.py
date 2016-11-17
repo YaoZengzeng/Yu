@@ -48,11 +48,11 @@ def getSalaryTables(excel_name):
 		if '合计' in cell_value:
 			end = r
 
-		ret = []
+		ret = {}
 
 	for r in range(start + 1, end):
 		data_row = sheetRowToSlice(sheet, r, ncols_num)
 		table = newTextTable(data_row)
-		ret.append(table.draw())
+		ret[sheet.cell(r, 0).value] = table.draw()
 
 	return ret

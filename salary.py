@@ -3,10 +3,13 @@
 
 import myemail
 import myexcel
+import mailAddress
 
-debug = 0
+debug = 0 
 
-tables = myexcel.getSalaryTables("test.xlsx")
+tableMap = myexcel.getSalaryTables("test.xlsx")
+
+addrMap = mailAddress.getMailAddrMap("mailAddress.xlsx")
 
 subject = '10月工资明细'
 
@@ -30,11 +33,15 @@ postfix = fo.read()
 
 fo.close()
 
-for table in tables:
-	table = prefix + "\n\n" + table + "\n\n" + postfix
+for name in tableMap:
+	if addrMap.has_key(name) == False :
+		continue
+	toAddr = addrMap[name]
+	content = prefix + "\n\n" + tableMap[name] + "\n\n" + postfix
 	if debug :
-		print table
-	else:
-		myemail.sendMail(subject, fromAddr, password, smtpServer, toAddr, table)
+		print "destination mail address is " + toAddr
+		print content
+	else :
+		myemail.sendMail(subject, fromAddr, password, smtpServer, toAddr, content)
 
 print "Job done!"
