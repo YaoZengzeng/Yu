@@ -19,7 +19,8 @@ def getMailAddrMap(excel_name):
 	reload(sys)
 	sys.setdefaultencoding('utf-8')
 
-	dict = {'姚增增' : 'yaozengzeng@foxmail.com'}
+	#initialize dict, just for test
+	dict = {'姚增增' : 'yaozengzeng@foxmail.com', 'xx' : 'yaozengzeng@foxmail.com', 'XX' : 'yaozengzeng@foxmail.com'}
 	for r in range(1, nrows_num):
 		name = sheet.cell(r, 0).value
 		addr = sheet.cell(r, 1).value
