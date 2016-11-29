@@ -10,11 +10,13 @@ debug = 0
 
 subject = '10月工资明细'
 
-fromAddr = 'yaozengzeng123@163.com'
+fromAddr = 'zengzengyao@harmonycloud.cn'
 
-password = '940512yzz'
+password = 'Yzz940512'
 
-smtpServer = 'smtp.163.com'
+smtpServer = 'smtp.exmail.qq.com'
+
+portNum = 465
 
 toAddr = 'yaozengzeng@foxmail.com'
 
@@ -44,7 +46,7 @@ for name in internTableMap:
 		print "Internship: destination mail address is " + toAddr
 		print htmlStr
 	else :
-		myemail.sendMail(subject, fromAddr, password, smtpServer, toAddr, htmlStr)
+		myemail.sendMail(subject, fromAddr, password, smtpServer, portNum, toAddr, htmlStr)
 
 for name in employeeTableMap:
 	if addrMap.has_key(name) == False :
@@ -55,6 +57,6 @@ for name in employeeTableMap:
 		print "Employee: destination mail address is " + toAddr
 		print htmlStr
 	else :
-		myemail.sendMail(subject, fromAddr, password, smtpServer, toAddr, htmlStr)
+		myemail.sendMail(subject, fromAddr, password, smtpServer, portNum, toAddr, htmlStr)
 
 print "Job done!"
