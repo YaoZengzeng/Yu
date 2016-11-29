@@ -4,6 +4,7 @@
 import myemail
 import myexcel
 import mailAddress
+import text2html
 
 debug = 0 
 
@@ -38,22 +39,22 @@ for name in internTableMap:
 	if addrMap.has_key(name) == False :
 		continue
 	toAddr = addrMap[name]
-	content = prefix + "\n\n" + internTableMap[name] + "\n\n" + postfix
+	htmlStr = text2html.text2html(prefix.split('\n'), internTableMap[name], postfix.split('\n'))
 	if debug :
 		print "Internship: destination mail address is " + toAddr
-		print content
+		print htmlStr
 	else :
-		myemail.sendMail(subject, fromAddr, password, smtpServer, toAddr, content)
+		myemail.sendMail(subject, fromAddr, password, smtpServer, toAddr, htmlStr)
 
 for name in employeeTableMap:
 	if addrMap.has_key(name) == False :
 		continue
 	toAddr = addrMap[name]
-	content = prefix + "\n\n" + employeeTableMap[name] + "\n\n" + postfix
+	htmlStr = text2html.text2html(prefix.split('\n'), employeeTableMap[name], postfix.split('\n'))
 	if debug :
 		print "Employee: destination mail address is " + toAddr
-		print content
+		print htmlStr
 	else :
-		myemail.sendMail(subject, fromAddr, password, smtpServer, toAddr, content)
+		myemail.sendMail(subject, fromAddr, password, smtpServer, toAddr, htmlStr)
 
 print "Job done!"

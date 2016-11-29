@@ -7,8 +7,8 @@ import smtplib
 from email.header import Header
 from email.mime.text import MIMEText
 
-def sendMail(subject, fromAddr, password, smtpServer, toAddr, content):
-	msg = MIMEText(content, 'plain', 'utf-8')
+def sendMail(subject, fromAddr, password, smtpServer, toAddr, htmlStr):
+	msg = MIMEText(htmlStr, 'html', 'utf-8')
 	msg['From'] = fromAddr
 	msg['To'] = toAddr
 	msg['Subject'] = Header(subject, 'utf8').encode()
