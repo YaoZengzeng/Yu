@@ -5,31 +5,25 @@ import myemail
 import myexcel
 import mailAddress
 import text2html
+import ConfigParser
 
-debug = 0 
+debug = 0
 
-subject = '10月工资明细'
+config  = ConfigParser.ConfigParser()
+config.readfp(open("config.ini", "rb"))
 
-fromAddr = 'zengzengyao@harmonycloud.cn'
-
-password = 'Yzz940512'
-
-smtpServer = 'smtp.exmail.qq.com'
-
-portNum = 465
-
-toAddr = 'yaozengzeng@foxmail.com'
+smtpServer = config.get("global", "smtpServer")
+portNum = int(config.get("global", "portNum"))
+subject = config.get("global", "subject")
+fromAddr = config.get("global", "fromAddr")
+password = config.get("global", "password")
 
 fo = open("prefix.txt", "r")
-
 prefix = fo.read()
-
 fo.close()
 
 fo = open("postfix.txt", "r")
-
 postfix = fo.read()
-
 fo.close()
 
 addrMap = mailAddress.getMailAddrMap("mailAddress.xlsx")

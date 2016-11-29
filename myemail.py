@@ -14,12 +14,12 @@ def sendMail(subject, fromAddr, password, smtpServer, portNum, toAddr, htmlStr):
 	msg['To'] = toAddr
 	msg['Subject'] = Header(subject, 'utf8').encode()
 	if portNum == 25:
-		server = SMTP_SSL(smtpServer)
+		server = smtplib.SMTP(smtpServer, 25)
 		server.login(fromAddr, password)
 		server.sendmail(fromAddr, [toAddr], msg.as_string())
 		server.quit()
 	else:
-		server = smtplib.SMTP(smtpServer, 25)
+		server = SMTP_SSL(smtpServer)
 		server.login(fromAddr, password)
 		server.sendmail(fromAddr, [toAddr], msg.as_string())
 		server.quit()
