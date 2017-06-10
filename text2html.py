@@ -12,11 +12,19 @@ def text2html(prefixes, table, postfixes):
 	htmlStr += '<br><br>'
 
 	htmlStr += '<table border="1">'
-	for row in table:
-		htmlStr += '<tr>'
-		for cell in row:
-			htmlStr += ('<td>' + cell + '</td>')
-		htmlStr += '</tr>'
+
+	th = table[0]
+	htmlStr += '<tr>'
+	for cell in th:
+		htmlStr += ('<th>' + cell + '</th>')
+	htmlStr += '</tr>'
+
+	td = table[1]
+	htmlStr += '<tr>'
+	for cell in td:
+		htmlStr += ('<td>' + cell + '</td>')
+	htmlStr += '</tr>'
+
 	htmlStr += '</table>'
 
 	htmlStr += '<br><br>'

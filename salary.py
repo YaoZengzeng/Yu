@@ -28,8 +28,31 @@ fo.close()
 
 addrMap = mailAddress.getMailAddrMap("mailAddress.xlsx")
 
-internTableMap = myexcel.getSalaryTables("test.xlsx", True)
-employeeTableMap = myexcel.getSalaryTables("test.xlsx", False)
+fteTableMap = myexcel.getSalaryTables("salary.xlsx", 0)
+pteTableMap = myexcel.getSalaryTables("salary.xlsx", 1)
+internTableMap = myexcel.getSalaryTables("salary.xlsx", 2)
+
+for name in fteTableMap:
+	if addrMap.has_key(name) == False :
+		continue
+	toAddr = addrMap[name]
+	htmlStr = text2html.text2html(prefix.split('\n'), fteTableMap[name], postfix.split('\n'))
+	if debug :
+		print "FTE Employee: destination mail address is " + toAddr
+		print htmlStr
+	else :
+		myemail.sendMail(subject, fromAddr, password, smtpServer, portNum, toAddr, htmlStr)
+
+for name in pteTableMap:
+	if addrMap.has_key(name) == False :
+		continue
+	toAddr = addrMap[name]
+	htmlStr = text2html.text2html(prefix.split('\n'), pteTableMap[name], postfix.split('\n'))
+	if debug :
+		print "PTE Employee: destination mail address is " + toAddr
+		print htmlStr
+	else :
+		myemail.sendMail(subject, fromAddr, password, smtpServer, portNum, toAddr, htmlStr)
 
 for name in internTableMap:
 	if addrMap.has_key(name) == False :
@@ -38,17 +61,6 @@ for name in internTableMap:
 	htmlStr = text2html.text2html(prefix.split('\n'), internTableMap[name], postfix.split('\n'))
 	if debug :
 		print "Internship: destination mail address is " + toAddr
-		print htmlStr
-	else :
-		myemail.sendMail(subject, fromAddr, password, smtpServer, portNum, toAddr, htmlStr)
-
-for name in employeeTableMap:
-	if addrMap.has_key(name) == False :
-		continue
-	toAddr = addrMap[name]
-	htmlStr = text2html.text2html(prefix.split('\n'), employeeTableMap[name], postfix.split('\n'))
-	if debug :
-		print "Employee: destination mail address is " + toAddr
 		print htmlStr
 	else :
 		myemail.sendMail(subject, fromAddr, password, smtpServer, portNum, toAddr, htmlStr)
